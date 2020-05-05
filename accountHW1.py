@@ -25,7 +25,7 @@ class Account(User):
         self.accountBal -= amount
 
     def readAcc(self):
-        print("계좌번호: ", user.accountNum, "/ 이름: ", user.name, "/ 잔액: ", user.accountBal, "원")
+        print("Account Number: ", user.accountNum, "/ UserName: ", user.name, "/ Balance: ", user.accountBal, "원")
 
 
 
