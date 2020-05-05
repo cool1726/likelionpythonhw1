@@ -50,6 +50,7 @@ while True:
         else:
             print("     INVALID ACCOUNT NUMBER")
             continue
+
     #계좌조회
     elif menu_num == 4:
         print("     <Checking account>")
