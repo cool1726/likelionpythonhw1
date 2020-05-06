@@ -33,10 +33,10 @@ class Account(User):
                 deposit_temp = int(input(" * Please enter the amount you deposit : "))
                 if deposit_temp < 0:
                     print("     INVAILD INPUT")
-                    break
-                user.accountBal += deposit_temp
-                print(" * Account Balance : ", user.accountBal, "원")
-                print(" * Deposit Complete")
+                else:
+                    user.accountBal += deposit_temp
+                    print(" * Account Balance : ", user.accountBal, "원")
+                    print(" * Deposit Complete")
                 return 0
             else:
                 if (user == userDB[-1]):
@@ -57,14 +57,13 @@ class Account(User):
                 withdraw_temp = int(input(" * Please enter the amount you withdraw : "))
                 if withdraw_temp < 0:
                     print("     INVAILD INPUT")
-                    return 0
                 elif withdraw_temp <= user.accountBal:
                     user.accountBal -= withdraw_temp
                     print(" * Account Balance : ", user.accountBal, "원")
                     print(" * Withdraw Complete")
                 else:
                     print("     NOT ENOUGH BALANCE")
-                    return 0
+                return 0
             else:
                 if (user == userDB[-1]):
                     print("     INVALID ACCOUNT NUMBER")
