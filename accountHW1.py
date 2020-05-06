@@ -2,6 +2,7 @@ from User import *
 
 userDB = []
 
+
 class Account(User):
     def __init__(self):
         pass
@@ -18,18 +19,51 @@ class Account(User):
         self.accountBal = int(input(" * Deposit amount : "))
         print(" * Create Account Complete")
 
-    def deposit(self, amount):
-        self.accountBal += amount
+    def deposit(self):
+        print("     <Deposit>")
+        account_temp = input(" * Enter the account number : ")
+        for user in userDB:
+            if account_temp == user.accountNum:
+                print(" * Account NAME : ", user.name)
+                print(" * Account BALANCE : ", user.accountBal)
+                deposit_temp = int(input(" * Please enter the amount you deposit : "))
+                user.accountBal += deposit_temp
+                print(" * Account Balance : ", user.accountBal, "원")
+                print(" * Deposit Complete")
+                break
+            else:
+                if (user == userDB[-1]):
+                    print("     INVALID ACCOUNT NUMBER")
+                    break
 
-    def withdraw(self, amount):
-        self.accountBal -= amount
+
+    def withdraw(self):
+        print("     <Withdraw>")
+        account_temp = input(" * Enter the account number : ")
+        for user in userDB:
+            if account_temp == user.accountNum:
+                print(" * Account NAME : ", user.name)
+                print(" * Account BALANCE : ", user.accountBal)
+                withdraw_temp = int(input(" * Please enter the amount you withdraw : "))
+                if withdraw_temp <= user.accountBal:
+                    user.accountBal -= withdraw_temp
+                    print(" * Account Balance : ", user.accountBal, "원")
+                    print(" * Deposit Complete")
+                else:
+                    print("     NOT ENOUGH BALANCE")
+                    break
+            else:
+                if (user == userDB[-1]):
+                    print("     INVALID ACCOUNT NUMBER")
+                    break
+
 
     def readAcc(self):
         print("Account Number: ", user.accountNum, "/ UserName: ", user.name, "/ Balance: ", user.accountBal, "원")
 
 
-if __name__ == "__main__" :
-    while True :
+if __name__ == "__main__":
+    while True:
         print("---------------------------")
         print("_____<Select the Menu>_____")
         print("| 1. Create account       |")
@@ -48,43 +82,15 @@ if __name__ == "__main__" :
 
         # 2. 입금하기
         elif menu_num == 2:
-            print("     <Deposit>")
-            account_temp = input(" * Enter the account number : ")
-            for user in userDB:
-                if account_temp == user.accountNum:
-                    print(" * Account NAME : ", user.name)
-                    print(" * Account BALANCE : ", user.accountBal)
-                    deposit_temp = int(input(" * Please enter the amount you deposit : "))
-                    user.deposit(deposit_temp)
-                    print(" * Account Balance : ", user.accountBal, "원")
-                    print(" * Deposit Complete")
-                    break
-                else:
-                    if (user == userDB[-1]):
-                        print("     INVALID ACCOUNT NUMBER")
-                        break
+            acc = Account()
+            acc.deposit()
 
 
         # 3. 출금하기
         elif menu_num == 3:
-            print("     <Withdraw>")
-            account_temp = input(" * Enter the account number : ")
-            for user in userDB:
-                if account_temp == user.accountNum:
-                    print(" * Account NAME : ", user.name)
-                    print(" * Account BALANCE : ", user.accountBal)
-                    withdraw_temp = int(input(" * Please enter the amount you withdraw : "))
-                    if withdraw_temp <= user.accountBal:
-                        user.withdraw(withdraw_temp)
-                        print(" * Account Balance : ", user.accountBal, "원")
-                        print(" * Deposit Complete")
-                    else:
-                        print("     NOT ENOUGH BALANCE")
-                        break
-                else:
-                    if (user == userDB[-1]):
-                        print("     INVALID ACCOUNT NUMBER")
-                        break
+            acc = Account()
+            acc.withdraw()
+
 
         # 4. 계좌조회
         elif menu_num == 4:
