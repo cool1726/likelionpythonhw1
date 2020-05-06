@@ -2,7 +2,6 @@ from User import *
 
 userDB = []
 
-
 class Account(User):
     def __init__(self):
         pass
@@ -12,12 +11,14 @@ class Account(User):
         accountNum = input(" * Enter the account number : ")
         for user in userDB:
             if accountNum == user.accountNum:
-                print(" ** Same Account already exists")
-                continue
+                print("     SAME ACCOUNT ALREADY EXISTS")
+                return 0
         self.accountNum = accountNum
         self.name = input(" * Enter your name : ")
         self.accountBal = int(input(" * Deposit amount : "))
+        userDB.append(acc)
         print(" * Create Account Complete")
+
 
     def deposit(self):
         print("     <Deposit>")
@@ -59,12 +60,17 @@ class Account(User):
 
 
     def readAcc(self):
-        print("Account Number: ", user.accountNum, "/ UserName: ", user.name, "/ Balance: ", user.accountBal, "원")
+        if len(userDB) == 0:
+            print("     NO ACCOUNT EXISTS")
+        else:
+            print("     <View all accounts>")
+            for user in userDB:
+                print("Account Number: ", user.accountNum, "/ UserName: ", user.name, "/ Balance: ", user.accountBal, "원")
 
 
 if __name__ == "__main__":
     while True:
-        print("---------------------------")
+        print()
         print("_____<Select the Menu>_____")
         print("| 1. Create account       |")
         print("| 2. Deposit              |")
@@ -74,29 +80,23 @@ if __name__ == "__main__":
         print("---------------------------")
         menu_num = int(input("Press the menu num : "))
 
+        acc = Account()
+
         # 1. 계좌개설
         if menu_num == 1:
-            acc = Account()
             acc.newAcc()
-            userDB.append(acc)
 
         # 2. 입금하기
         elif menu_num == 2:
-            acc = Account()
             acc.deposit()
-
 
         # 3. 출금하기
         elif menu_num == 3:
-            acc = Account()
             acc.withdraw()
-
 
         # 4. 계좌조회
         elif menu_num == 4:
-            print("     <View all accounts>")
-            for user in userDB:
-                user.readAcc()
+            acc.readAcc()
 
         # 5. 프로그램 종료
         elif menu_num == 5:
