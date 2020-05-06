@@ -1,15 +1,15 @@
-users = []
+from User import *
 
-class User:
-    name = '이름'
-    accountNum = '계좌번호'
-    accountBal = 0
+userDB = []
 
 class Account(User):
     def __init__(self):
+        pass
+
+    def newAcc(self):
         print("     <Create account>")
         accountNum = input(" * Enter the account number : ")
-        for user in users:
+        for user in userDB:
             if accountNum == user.accountNum:
                 print(" ** Same Account already exists")
                 continue
@@ -28,7 +28,6 @@ class Account(User):
         print("Account Number: ", user.accountNum, "/ UserName: ", user.name, "/ Balance: ", user.accountBal, "원")
 
 
-
 if __name__ == "__main__" :
     while True :
         print("---------------------------")
@@ -43,14 +42,15 @@ if __name__ == "__main__" :
 
         # 1. 계좌개설
         if menu_num == 1:
-            createAcc = Account()
-            users.append(createAcc)
+            acc = Account()
+            acc.newAcc()
+            userDB.append(acc)
 
         # 2. 입금하기
         elif menu_num == 2:
             print("     <Deposit>")
             account_temp = input(" * Enter the account number : ")
-            for user in users:
+            for user in userDB:
                 if account_temp == user.accountNum:
                     print(" * Account NAME : ", user.name)
                     print(" * Account BALANCE : ", user.accountBal)
@@ -60,7 +60,7 @@ if __name__ == "__main__" :
                     print(" * Deposit Complete")
                     break
                 else:
-                    if (user == users[-1]):
+                    if (user == userDB[-1]):
                         print("     INVALID ACCOUNT NUMBER")
                         break
 
@@ -69,7 +69,7 @@ if __name__ == "__main__" :
         elif menu_num == 3:
             print("     <Withdraw>")
             account_temp = input(" * Enter the account number : ")
-            for user in users:
+            for user in userDB:
                 if account_temp == user.accountNum:
                     print(" * Account NAME : ", user.name)
                     print(" * Account BALANCE : ", user.accountBal)
@@ -82,14 +82,14 @@ if __name__ == "__main__" :
                         print("     NOT ENOUGH BALANCE")
                         break
                 else:
-                    if (user == users[-1]):
+                    if (user == userDB[-1]):
                         print("     INVALID ACCOUNT NUMBER")
                         break
 
         # 4. 계좌조회
         elif menu_num == 4:
             print("     <View all accounts>")
-            for user in users:
+            for user in userDB:
                 user.readAcc()
 
         # 5. 프로그램 종료
