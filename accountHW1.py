@@ -1,4 +1,4 @@
-from User import *
+from UserDB.User import *
 
 userDB = []
 
@@ -22,6 +22,9 @@ class Account(User):
 
     def deposit(self):
         print("     <Deposit>")
+        if len(userDB) == 0:
+            print("     NO ACCOUNT EXISTS")
+            return 0
         account_temp = input(" * Enter the account number : ")
         for user in userDB:
             if account_temp == user.accountNum:
@@ -31,7 +34,7 @@ class Account(User):
                 user.accountBal += deposit_temp
                 print(" * Account Balance : ", user.accountBal, "원")
                 print(" * Deposit Complete")
-                break
+                return 0
             else:
                 if (user == userDB[-1]):
                     print("     INVALID ACCOUNT NUMBER")
@@ -40,6 +43,9 @@ class Account(User):
 
     def withdraw(self):
         print("     <Withdraw>")
+        if len(userDB) == 0:
+            print("     NO ACCOUNT EXISTS")
+            return 0
         account_temp = input(" * Enter the account number : ")
         for user in userDB:
             if account_temp == user.accountNum:
@@ -49,10 +55,10 @@ class Account(User):
                 if withdraw_temp <= user.accountBal:
                     user.accountBal -= withdraw_temp
                     print(" * Account Balance : ", user.accountBal, "원")
-                    print(" * Deposit Complete")
+                    print(" * Withdraw Complete")
                 else:
                     print("     NOT ENOUGH BALANCE")
-                    break
+                    return 0
             else:
                 if (user == userDB[-1]):
                     print("     INVALID ACCOUNT NUMBER")
