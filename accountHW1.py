@@ -30,13 +30,18 @@ class Account(User):
             if account_temp == user.accountNum:
                 print(" * Account NAME : ", user.name)
                 print(" * Account BALANCE : ", user.accountBal)
-                deposit_temp = int(input(" * Please enter the amount you deposit : "))
-                if deposit_temp < 0:
+                deposit_string = input(" * Please enter the amount you deposit : ")
+                isDecimal = deposit_string.isdecimal()
+                if (not isDecimal): # 입력금액이 숫자가 아닐때
                     print("     INVAILD INPUT")
-                else:
-                    user.accountBal += deposit_temp
-                    print(" * Account Balance : ", user.accountBal, "원")
+                elif int(deposit_string) < 0 :  # 입력금액이 음수일때
+                    print("     INVAILD INPUT")
+                elif int(deposit_string) <= user.accountBal:    # 입력금액 < 잔고 : 정상작동
+                    user.accountBal += int(deposit_string)
+                    print(" * Account Balance : ", user.accountBal, "won")
                     print(" * Deposit Complete")
+                else:
+                    print("     NOT ENOUGH BALANCE")
                 return 0
             else:
                 if (user == userDB[-1]):
@@ -54,12 +59,15 @@ class Account(User):
             if account_temp == user.accountNum:
                 print(" * Account NAME : ", user.name)
                 print(" * Account BALANCE : ", user.accountBal)
-                withdraw_temp = int(input(" * Please enter the amount you withdraw : "))
-                if withdraw_temp < 0:
+                withdraw_string = input(" * Please enter the amount you withdraw : ")
+                isDecimal = withdraw_string.isdecimal()
+                if (not isDecimal):
                     print("     INVAILD INPUT")
-                elif withdraw_temp <= user.accountBal:
-                    user.accountBal -= withdraw_temp
-                    print(" * Account Balance : ", user.accountBal, "원")
+                elif int(withdraw_string) < 0 :
+                    print("     INVAILD INPUT")
+                elif int(withdraw_string) <= user.accountBal:
+                    user.accountBal -= int(withdraw_string)
+                    print(" * Account Balance : ", user.accountBal, "won")
                     print(" * Withdraw Complete")
                 else:
                     print("     NOT ENOUGH BALANCE")
@@ -76,7 +84,7 @@ class Account(User):
         else:
             print("     <View all accounts>")
             for user in userDB:
-                print("Account Number: ", user.accountNum, "/ UserName: ", user.name, "/ Balance: ", user.accountBal, "원")
+                print("Account Number: ", user.accountNum, "/ UserName: ", user.name, "/ Balance: ", user.accountBal, "won")
 
 
 if __name__ == "__main__":
